@@ -104,9 +104,11 @@ void Game::processMouse(sf::Event t_event)
 	if (sf::Mouse::Left == t_event.mouseButton.button)
 	{
 		m_colour.r = (m_colour.r + 60) % 256;
-		newVertrex.color = m_colour;
+		newVertrex.color = sf::Color::White;
 		newVertrex.position.x = t_event.mouseButton.x;
 		newVertrex.position.y = t_event.mouseButton.y;
+		newVertrex.texCoords = m_photoCoOrd[index];
+		index = (index + 1 ) % 4;
 		m_points.append(newVertrex);
 	}
 
@@ -130,7 +132,7 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	m_window.draw(m_points);
+	m_window.draw(m_points,&m_petePic);
 	m_window.draw(m_circle);
 	m_window.draw(m_box);
 	m_window.display();
@@ -172,8 +174,12 @@ void Game::setupSprite()
 
 void Game::setupVertexArray()
 {
+	if (!m_petePic.loadFromFile("ASSETS//IMAGES//pete.png"))
+	{
+		std::cout << "problem with Pete" << std::endl;
+	}
 	sf::Vertex newVertex; // new point/vertex to add
-	m_points.setPrimitiveType(sf::Triangles);
+	m_points.setPrimitiveType(sf::Quads);
 	m_colour = sf::Color::Blue;
 
 	m_points.clear();

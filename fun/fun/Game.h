@@ -45,7 +45,11 @@ private:
 	sf::Color m_colour; // colour ofr next vertex
 	sf::CircleShape m_circle;
 	sf::RectangleShape m_box;
+	sf::Texture m_petePic;
+	sf::Vector2f m_photoCoOrd[4] = { {0.0f,0.0f}, {400.0f, 0.0f}, {400.0f, 400.0f}, {0.0f,400.0f} };
+	int index=  0;
 };
+
 
 #endif // !GAME_HPP
 
