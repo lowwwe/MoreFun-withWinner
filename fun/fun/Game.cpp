@@ -78,6 +78,10 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
+		if ( sf::Event::MouseButtonReleased == newEvent.type)
+		{
+			processMouse(newEvent);
+		}
 	}
 }
 
@@ -92,6 +96,20 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_exitGame = true;
 	}
+}
+
+void Game::processMouse(sf::Event t_event)
+{
+	sf::Vertex newVertrex;
+	if (sf::Mouse::Left == t_event.mouseButton.button)
+	{
+		m_colour.r = (m_colour.r + 60) % 256;
+		newVertrex.color = m_colour;
+		newVertrex.position.x = t_event.mouseButton.x;
+		newVertrex.position.y = t_event.mouseButton.y;
+		m_points.append(newVertrex);
+	}
+
 }
 
 /// <summary>
@@ -113,6 +131,8 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	m_window.draw(m_points);
+	m_window.draw(m_circle);
+	m_window.draw(m_box);
 	m_window.display();
 }
 
@@ -157,16 +177,17 @@ void Game::setupVertexArray()
 	m_colour = sf::Color::Blue;
 
 	m_points.clear();
-	newVertex.position = sf::Vector2f{ 20.0f,20.0f };
-	newVertex.color = m_colour;
 
+	m_circle.setRadius(100.0f);
+	m_circle.setPosition(0.0f, 0.0f);
+	m_circle.setFillColor(Peach);
+	m_circle.setPointCount(45);
 
-	m_points.append(newVertex);
-	newVertex.position = { 150.0f, 200.0f };
-	m_points.append(newVertex);
+	m_box.setPosition(400.0f, 400.0f);
+	m_box.setFillColor(sf::Color{ 128,128,128,95 });
+	m_box.setSize(sf::Vector2f{ 50.0f,50.0f });
 
-	newVertex.position = sf::Vector2f(300.0f, 100.0f);
-	m_points.append(newVertex);
+	
 
 	
 

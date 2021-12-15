@@ -11,6 +11,8 @@
 /// </summary>
 #include <SFML/Graphics.hpp>
 
+const sf::Color Peach = sf::Color{ 190,112,65,255 };
+
 class Game
 {
 public:
@@ -25,6 +27,7 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
+	void processMouse(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	
@@ -40,6 +43,8 @@ private:
 	bool m_exitGame; // control exiting game
 	sf::VertexArray m_points;// vertext arry for ourt drawings
 	sf::Color m_colour; // colour ofr next vertex
+	sf::CircleShape m_circle;
+	sf::RectangleShape m_box;
 };
 
 #endif // !GAME_HPP
