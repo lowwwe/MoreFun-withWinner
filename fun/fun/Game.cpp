@@ -22,6 +22,7 @@ Game::Game() :
 {
 	setupFontAndText(); // load font 
 	setupSprite(); // load texture
+	setupVertexArray();
 }
 
 /// <summary>
@@ -111,8 +112,7 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	m_window.draw(m_welcomeMessage);
-	m_window.draw(m_logoSprite);
+	m_window.draw(m_points);
 	m_window.display();
 }
 
@@ -148,4 +148,26 @@ void Game::setupSprite()
 	}
 	m_logoSprite.setTexture(m_logoTexture);
 	m_logoSprite.setPosition(300.0f, 180.0f);
+}
+
+void Game::setupVertexArray()
+{
+	sf::Vertex newVertex; // new point/vertex to add
+	m_points.setPrimitiveType(sf::Triangles);
+	m_colour = sf::Color::Blue;
+
+	m_points.clear();
+	newVertex.position = sf::Vector2f{ 20.0f,20.0f };
+	newVertex.color = m_colour;
+
+
+	m_points.append(newVertex);
+	newVertex.position = { 150.0f, 200.0f };
+	m_points.append(newVertex);
+
+	newVertex.position = sf::Vector2f(300.0f, 100.0f);
+	m_points.append(newVertex);
+
+	
+
 }

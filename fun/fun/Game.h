@@ -30,6 +30,7 @@ private:
 	
 	void setupFontAndText();
 	void setupSprite();
+	void setupVertexArray();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
@@ -37,7 +38,8 @@ private:
 	sf::Texture m_logoTexture; // texture used for sfml logo
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
-
+	sf::VertexArray m_points;// vertext arry for ourt drawings
+	sf::Color m_colour; // colour ofr next vertex
 };
 
 #endif // !GAME_HPP
